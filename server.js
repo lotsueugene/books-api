@@ -62,6 +62,17 @@ app.get('/books', (req,res) =>{
     res.json(books);
 })
 
+// GET /api/books/:id - Retrieve a specific book by ID
+app.get('/books/:id', (req,res) => {
+    const bookId = parseInt(req.params.id);
+    const book = books.find(m => m.id === bookId)
+
+    if (book) {
+        res.json(book);
+    } else {
+        res.status(404).json({error: "Book not found"})
+    }
+})
 
 // Start the server
 if (require.main === module) {
