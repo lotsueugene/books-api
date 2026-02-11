@@ -1,3 +1,13 @@
+const express = require('express');
+const app = express();
+const port = 3000;
+
+
+// Middleware to parse JSON requests
+app.use(express.json());
+
+
+
 // Books for bookstore API
 let books = [
     {
@@ -32,12 +42,27 @@ let books = [
     'DELETE /api/books/:id': 'Delete a book'
 */
 
+//GET ENPOINT
+app.get('/', (req, res) => {
+    res.json({ 
+        message: "Welcome to the Books API",
+        endpoints: {
+            "GET /books": "Get all books",
+            "GET /books/:id": "Get a specific book by ID",
+            'POST /api/books': 'Add a new book',
+            'PUT /api/books/:id': 'Update a book',
+            'DELETE /api/books/:id': 'Delete a book'
+        }
+    });
+});
 
 
-
-
-
-
+// Start the server
+if (require.main === module) {
+  app.listen(port, () => {
+    console.log(`API server running at http://localhost:${port}`);
+  });
+}
 
 
 
