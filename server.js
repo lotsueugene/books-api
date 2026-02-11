@@ -31,16 +31,8 @@ let books = [
         genre: "Dystopian Fiction",
         copiesAvailable: 7
     }
-    // Add more books if you'd like!
 ];
 
-/* Create your REST API here with the following endpoints:
-    'GET /api/books': 'Get all books',
-    'GET /api/books/:id': 'Get a specific book',
-    'POST /api/books': 'Add a new book',
-    'PUT /api/books/:id': 'Update a book',
-    'DELETE /api/books/:id': 'Delete a book'
-*/
 
 //GET ENPOINT
 app.get('/', (req, res) => {
@@ -72,7 +64,7 @@ app.get('/books/:id', (req,res) => {
     } else {
         res.status(404).json({error: "Book not found"})
     }
-})
+});
 
 // POST /api/books: Add a new book
 app.post('/books', (req,res) =>{
@@ -95,7 +87,7 @@ app.post('/books', (req,res) =>{
     //Return the created book with 201 status
     res.status(201).json(newBook)
 
-})
+});
 
 
 // PUT /api/books/:id - Update an existing book
@@ -121,14 +113,37 @@ app.put('/books/:id', (req,res) =>{
 
     //Return the updated books
     res.json(books[bookIndex])
-})
+});
+
+
+// DELETE /api/books/:id - Remove a book
+app.delete('/books/:id', (req,res) =>{
+    const bookId = parseInt(req.params.id);
+    
+
+    //Find the book index
+    const bookIndex = books.findIndex(m => m.id === bookId)
+
+    if (bookIndex === -1){
+        return res.status(404).json({error: 'Book not found'})
+    }
+
+    //Remove the book from array
+    const deletedBook = books.splice(bookIndex,1)[0];
+
+    //Return the deleted book
+    res.json({ message: 'Book deleted successfully', deletedBook });
+
+});
+
+
 
 // Start the server
 if (require.main === module) {
   app.listen(port, () => {
     console.log(`API server running at http://localhost:${port}`);
   });
-}
+};
 
 
 
