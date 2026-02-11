@@ -74,6 +74,29 @@ app.get('/books/:id', (req,res) => {
     }
 })
 
+// POST /api/books: Add a new book
+app.post('/books', (req,res) =>{
+    // Extract data from request body
+    const {title, author, genre, copiesAvailable} = req.body;
+
+    // Create new book with generated ID
+    const newBook = {
+        id: books.length + 1,
+        title,
+        author,
+        genre,
+        copiesAvailable
+    };
+
+    //Add to books array
+    books.push(newBook);
+
+
+    //Return the created book with 201 status
+    res.status(201).json(newBook)
+
+})
+
 // Start the server
 if (require.main === module) {
   app.listen(port, () => {
