@@ -57,6 +57,12 @@ app.get('/', (req, res) => {
 });
 
 
+// GET /books - Return all books
+app.get('/books', (req,res) =>{
+    res.json(books);
+})
+
+
 // Start the server
 if (require.main === module) {
   app.listen(port, () => {
