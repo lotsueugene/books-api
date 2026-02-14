@@ -78,3 +78,12 @@ describe('Book API | PUT', ()=>{
 });
 
 });
+
+
+
+test('should delete existing book', async () => {
+    const response = await request(app).delete('/books/1');
+
+    expect(response.status).toBe(200);
+    expect(response.body).toHaveProperty('message');
+});
