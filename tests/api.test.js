@@ -10,7 +10,7 @@
 const request = require('supertest');
 const app = require('../server'); 
 
-describe('Book API', () => {
+describe('Book API| GET ENDPOINTS', () => {
     test('should return all books', async () => {
     const response = await request(app).get('/books');
 
@@ -27,7 +27,12 @@ describe('Book API', () => {
     expect(response.body).toHaveProperty('title');
 });
 
-
+    test('should return book by ID', async () => {
+    const response = await request(app).get('/books/999');
+  
+    expect(response.status).toBe(404);
+    expect(response.body).toHaveProperty('error');
+});
 
 });
 
