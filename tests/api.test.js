@@ -10,14 +10,24 @@
 const request = require('supertest');
 const app = require('../server'); 
 
-describe('Movie API', () => {
-    test('should return all movies', async () => {
+describe('Book API', () => {
+    test('should return all books', async () => {
     const response = await request(app).get('/books');
 
     expect(response.status).toBe(200);
 
     expect(response.body).toHaveLength(3); 
     });
+
+    test('should return books by ID', async () => {
+    const response = await request(app).get('/books/1');
+  
+    expect(response.status).toBe(200);
+    expect(response.body).toHaveProperty('id', 1);
+    expect(response.body).toHaveProperty('title');
+});
+
+
 
 });
 
