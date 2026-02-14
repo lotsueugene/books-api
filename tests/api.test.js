@@ -1,0 +1,24 @@
+// In the tests/api.test.js file, write Jest tests using Supertest that verify:
+
+// GET endpoints return correct data and status codes
+// POST endpoints create new resources properly
+// PUT endpoints update existing resources correctly
+// DELETE endpoints remove resources successfully
+// Error cases return appropriate 404 status codes
+
+
+const request = require('supertest');
+const app = require('../server'); 
+
+describe('Movie API', () => {
+    test('should return all movies', async () => {
+    const response = await request(app).get('/books');
+
+    expect(response.status).toBe(200);
+
+    expect(response.body).toHaveLength(3); 
+    });
+
+});
+
+
