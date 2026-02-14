@@ -37,3 +37,26 @@ describe('Book API| GET ENDPOINTS', () => {
 });
 
 
+describe('Book API | POST', ()=> {
+test('should create a new book', async () => {
+    const newBook = {
+        title: "Inception",
+        author: "Eugene Lotsu",
+        genre: 'Fiction',
+        copiesAvailable: 10
+    };
+
+    const response = await request(app)
+        .post('/books')
+        .send(newBook);
+  
+        expect(response.status).toBe(201);
+        expect(response.body).toHaveProperty('id');
+    expect(response.body.title).toBe('Inception');
+});
+
+});
+
+
+
+
