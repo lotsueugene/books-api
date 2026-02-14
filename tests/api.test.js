@@ -59,4 +59,22 @@ test('should create a new book', async () => {
 
 
 
+describe('Book API | PUT', ()=>{
+    test('should update existing book', async () => {
+    const updatedBook =  {
+        id: 1,
+        title: "The Great Gatsby",
+        author: "F. Scott Fitzgerald",
+        genre: "Fiction",
+        copiesAvailable: 0
+    };
 
+    const response = await request(app)
+        .put('/books/1')
+        .send(updatedBook);
+  
+    expect(response.status).toBe(200);
+    expect(response.body.genre).toBe('Fiction');
+});
+
+});
